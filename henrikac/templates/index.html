@@ -1,0 +1,30 @@
+{% extends '_layout.html' %}
+{% load static from staticfiles %}
+
+{% block title %}About me {{ block.super }}{% endblock %}
+
+{% block heading %}Henrik Abel{% endblock %}
+
+{% block subheading %}Web developer - Djangonaut{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-10 col-lg-8 mx-auto">
+            <h2 class="text-center">Who am I?</h2>
+            <hr class="col-5 col-sm-3 col-md-2 bg-info">
+            <p class="lead">Hello, I'm Henrik.<br> I'm a web developer from Hjørring, Denmark.</p>
+            <p class="lead">I have experience with:</p>
+            <ul class="list-unstyled">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript / jQuery</li>
+                <li>Python / Django</li>
+            </ul>
+        </div>
+        <div class="col-8 col-lg-3 mx-auto mt-5">
+            <img src="{% static '/img/profile-pic.png' %}" class="img-fluid rounded-circle" alt="Picture of Henrik Abel Christensen">
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,5 @@
 {% extends '_layout.html' %}
+{% load static from staticfiles %}
 
 {% block title %}My Portfolio {{ block.super }}{% endblock %}
 
@@ -7,4 +8,22 @@
 {% block subheading %}Some of my favorit projects{% endblock %}
 
 {% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        {% for project in object_list %}
+        <div class="col-10 col-sm-8 col-lg-4 mb-3">
+            <div class="card border-info h-100 mb-3">
+                <img class="card-img-top" src="{% static '/img/'|add:project.photo_file_name %}" alt="Photo of {{ project.title }}">
+                <div class="card-body text-info">
+                    <h5 class="card-title text-center">{{ project.title }}</h5>
+                    <p class="card-text">{{ project.description|linebreaksbr }}</p>
+                </div>
+                <div class="p-3">
+                    <a href="{{ project.url }}" target="_blank" class="btn btn-info btn-block">Visit</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

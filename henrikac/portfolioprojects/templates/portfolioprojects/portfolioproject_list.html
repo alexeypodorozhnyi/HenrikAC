@@ -13,7 +13,7 @@
         {% for project in object_list %}
         <div class="col-10 col-sm-8 col-lg-4 mb-3">
             <div class="card border-info h-100 mb-3">
-                <img class="card-img-top" src="{% static '/img/'|add:project.photo_file_name %}" alt="Photo of {{ project.title }}">
+                <img class="card-img-top" src="{% static 'img/'|add:project.photo_file_name %}" alt="Photo of {{ project.title }}">
                 <div class="card-body text-info">
                     <h5 class="card-title text-center">{{ project.title }}</h5>
                     <p class="card-text">{{ project.description|linebreaksbr }}</p>

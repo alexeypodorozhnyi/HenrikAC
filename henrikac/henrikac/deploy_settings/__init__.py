@@ -2,7 +2,7 @@ import dj_database_url
 
 from henrikac.settings import *
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',

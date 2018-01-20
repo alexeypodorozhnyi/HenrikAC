@@ -6,9 +6,10 @@ class PortfolioProject(models.Model):
     description = models.TextField()
     photo_file_name = models.CharField(max_length=80)
     url = models.CharField(max_length=80)
+    order = models.IntegerField(default=0)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['-order']
 
     def __str__(self):
         return 'Project: {}'.format(self.title)

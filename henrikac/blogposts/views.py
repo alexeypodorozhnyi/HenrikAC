@@ -6,3 +6,7 @@ from . import models
 
 class BlogPostListView(generic.ListView):
     model = models.BlogPost
+
+
+class BlogPostDetailView(generic.DetailView):
+    model = models.BlogPost

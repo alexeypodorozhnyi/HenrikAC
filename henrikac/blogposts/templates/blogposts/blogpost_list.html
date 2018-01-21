@@ -10,14 +10,14 @@
 <div class="container mt-5">
     <div class="col-9 mx-auto">
         {% for post in object_list %}
-        <h2 class="text-center font-weight-bold"><a href="#" class="text-dark">{{ post.title }}</a></h2>
+        <h2 class="text-center display-4 font-weight-bold"><a href="{% url 'blog:detail' pk=post.id %}" target="_blank" class="text-dark">{{ post.title }}</a></h2>
         <p class="text-center text-muted">
             <small>Category: {{ post.category }}</small><br>
             <small>Posted on: {{ post.pub_date|date:'F d, Y' }}</small>
         </p>
-        <p>{{ post.content|linebreaksbr|truncatewords:60 }}</p>
+        <p class="lead">{{ post.content|linebreaksbr|truncatewords:60 }}</p>
         <div class="col-12 col-md-4 mx-auto">
-            <a href="#" class="btn btn-info w-100">READ</a>
+            <a href="{% url 'blog:detail' pk=post.id %}" target="_blank" class="btn btn-info w-100">READ</a>
         </div>
         <hr class="mb-5 bg-info">
         {% endfor %}

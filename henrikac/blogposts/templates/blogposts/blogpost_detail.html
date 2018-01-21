@@ -1,0 +1,16 @@
+{% extends '_layout.html' %}
+
+{% block title %}{{ object.title }} {{ block.super }}{% endblock %}
+
+{% block heading %}{{ object.title }}{% endblock %}
+
+{% block subheading %}{{ object.category }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="col-8 pt-5 mx-auto">
+        <p class="lead">{{ object.content|linebreaksbr }}</p>
+        <p class="text-right text-muted"><small>Posted on: {{ object.pub_date|date:'F d, Y' }}</small></p>
+    </div>
+</div>
+{% endblock %}

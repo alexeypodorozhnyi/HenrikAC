@@ -1,0 +1,16 @@
+{% extends '_layout.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Sign up {{ block.super }}{% endblock %}
+
+{% block heading %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Sign up">
+    </form>
+</div>
+{% endblock %}

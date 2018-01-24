@@ -1,4 +1,5 @@
 {% extends '_layout.html' %}
+{% load bootstrap4 %}
 
 {% block title %}{{ object.title }} {{ block.super }}{% endblock %}
 
@@ -8,9 +9,34 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="col-8 pt-5 mx-auto">
+    <div class="col-12 col-md-8 pt-5 mx-auto">
         <p class="lead">{{ object.content|linebreaksbr }}</p>
         <p class="text-right text-muted"><small>Posted on: {{ object.pub_date|date:'F d, Y' }}</small></p>
     </div>
+    <hr class="col-8 my-5 bg-info">
+    <h2 class="text-center">Comments</h2>
+
+    {% if not user.is_authenticated %}
+    <div class="col-6 text-center lead mx-auto my-3">
+        <a href="#" class="text-dark"><u>Login</u></a> or <a href="#" class="text-dark"><u>Sign up</u></a> to create a comment
+    </div>
+    {% endif %}
+
+    {% for comment in comments %}
+    <div class="col-10 col-md-8 col-lg-6 mx-auto pt-3 my-3 border border-info">
+        <p>{{ comment.comment }}</p>
+        <p class="text-right text-muted"><small>By {{ comment.author }} at {{ comment.pub_date|date:'F d, Y' }}</small></p>
+    </div>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <div class="col-10 col-md-8 col-lg-6 mt-5 mx-auto">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button 'Add Comment' button_type='submit' button_class='btn-info' %}
+        </form>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

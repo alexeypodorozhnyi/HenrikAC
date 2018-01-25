@@ -144,3 +144,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'blog:list'
 LOGOUT_REDIRECT_URL = 'blog:list'
+
+AUTH_USER_MODEL = 'users.User'

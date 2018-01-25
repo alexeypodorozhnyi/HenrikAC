@@ -1,9 +1,9 @@
 {% extends '_layout.html' %}
 {% load bootstrap4 %}
 
-{% block title %}Sign up {{ block.super }}{% endblock %}
+{% block title %}Login {{ block.super }}{% endblock %}
 
-{% block heading %}Sign Up{% endblock %}
+{% block heading %}Login{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
@@ -11,7 +11,7 @@
         <form action="" method="POST">
             {% csrf_token %}
             {% bootstrap_form form %}
-            {% bootstrap_button 'Sign up' button_type='submit' button_class='btn-info' %}
+            {% bootstrap_button 'Login' button_type='submit' button_class='btn-info' %}
         </form>
     </div>
 </div>

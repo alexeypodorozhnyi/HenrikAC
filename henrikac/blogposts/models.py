@@ -29,7 +29,7 @@ class Comment(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['id']
 
     def __str__(self):
         return 'Comment from <{}> to <{}>'.format(self.author, self.post.title)

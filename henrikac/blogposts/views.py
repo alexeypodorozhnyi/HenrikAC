@@ -9,6 +9,7 @@ from . import models
 
 class BlogPostListView(generic.ListView):
     model = models.BlogPost
+    paginate_by = 10
 
 
 # https://docs.djangoproject.com/en/1.8/topics/class-based-views/mixins/#using-formmixin-with-detailview

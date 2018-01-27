@@ -1,5 +1,6 @@
-from django.http import HttpResponseForbidden
-from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic.edit import FormMixin
 
@@ -48,3 +49,25 @@ class BlogPostDetailView(FormMixin, generic.DetailView):
             author=author,
         )
         return super().form_valid(form)
+
+
+class CommentDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = models.Comment
+    login_url = 'users:login'
+
+    def get_success_url(self):
+        return reverse_lazy('blog:detail', kwargs={'slug': self.object.post.slug})
+
+    # just returning self.post because nothing is going to be rendered here
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+    # if the user is not the author of the comment
+    # or is a superuser
+    # then the user will just be redirected away from the page
+    def post(self, request, *args, **kwargs):
+        user = self.request.user
+        self.object = self.get_object()
+        if not self.object.author == user.username or user.is_superuser:
+            return HttpResponseRedirect(reverse('blog:list'))
+        return self.delete(request, *args, **kwargs)

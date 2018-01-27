@@ -12,7 +12,7 @@
         {% for post in object_list %}
             {% if post.is_live %}
             <h2 class="text-center display-4 font-weight-bold">
-                <a href="{% url 'blog:detail' slug=post.slug %}" target="_blank" class="text-dark">{{ post.title }}</a>
+                <a href="{% url 'blog:detail' slug=post.slug %}" class="text-dark">{{ post.title }}</a>
             </h2>
             <p class="text-center text-muted">
                 <small>Category: {{ post.category }}</small><br>
@@ -20,7 +20,7 @@
             </p>
             <p class="lead">{{ post.get_content|truncatewords:40 }}</p>
             <div class="col-12 col-md-4 mx-auto">
-                <a href="{% url 'blog:detail' slug=post.slug %}" target="_blank" class="btn btn-info w-100">READ</a>
+                <a href="{% url 'blog:detail' slug=post.slug %}" class="btn btn-info w-100">READ</a>
             </div>
             <hr class="mb-5 bg-info">
             {% endif %}

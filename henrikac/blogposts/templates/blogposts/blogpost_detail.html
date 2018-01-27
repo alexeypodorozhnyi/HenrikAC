@@ -10,7 +10,7 @@
 {% block content %}
 <div class="container mt-5">
     <div class="col-12 col-md-8 pt-5 mx-auto">
-        <p class="lead">{{ object.content|linebreaksbr }}</p>
+        <p class="lead">{{ object.get_content|linebreaksbr }}</p>
         <p class="text-right text-muted"><small>Posted on: {{ object.pub_date|date:'F d, Y' }}</small></p>
     </div>
     <hr class="col-8 my-5 bg-info">

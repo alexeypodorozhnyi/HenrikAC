@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
 
@@ -19,6 +20,9 @@ class BlogPost(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(BlogPost, self).save(*args, **kwargs)
+
+    def get_content(self):
+        return mark_safe(self.content)
 
 
 class Comment(models.Model):

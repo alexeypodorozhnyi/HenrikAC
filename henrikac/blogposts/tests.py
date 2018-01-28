@@ -133,10 +133,18 @@ class CommentViewTest(TestCase):
         self.assertContains(resp, self.comment.comment)
         self.assertNotContains(resp, self.comment2.comment)
 
-    def test_comment_delete_view_get_request(self):
-        """Testing comments deleteview and url get request"""
-        pass
+    def test_comment_delete_view_anonymous_request(self):
+        """Testing if comments deleteview will redirect anonymous users to login"""
+        resp = self.client.get(reverse('blog:comment_delete', kwargs={'pk': self.comment.pk}), follow=True)
+        self.assertRedirects(resp, '{}?next={}'.format(
+            reverse('users:login'), reverse('blog:comment_delete', kwargs={'pk': self.comment.pk})
+        ))
+        resp = self.client.post(reverse('blog:comment_delete', kwargs={'pk': self.comment.pk}), follow=True)
+        self.assertRedirects(resp, '{}?next={}'.format(
+            reverse('users:login'), reverse('blog:comment_delete', kwargs={'pk': self.comment.pk})
+        ))
 
-    def test_comment_delete_view_post_request(self):
-        """Testing comments deleteview and url post request"""
+    def test_comment_delete_view_valid_request(self):
+        """Testing comments deleteview accepts requests from logged in users
+        that are superusers or is comment.author"""
         pass

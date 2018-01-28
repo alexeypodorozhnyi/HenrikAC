@@ -23,5 +23,5 @@ urlpatterns = [
     path('portfolio/', include('portfolioprojects.urls', namespace='portfolio')),
     path('blog/', include('blogposts.urls', namespace='blog')),
     path('', include('users.urls', namespace='users')),
-    path('', views.home, name='home'),
+    path('', views.HomeView.as_view(), name='home'),
 ]

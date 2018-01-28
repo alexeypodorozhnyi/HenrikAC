@@ -24,13 +24,15 @@
 
     {% for comment in comments %}
     <div class="col-10 col-md-8 col-lg-6 mx-auto pt-3 my-3 border border-info">
-        <p>{{ comment.comment }}</p>
-        <p class="text-right text-muted"><small>By {{ comment.author }} at {{ comment.pub_date|date:'F d, Y' }}</small></p>
-        {% if comment.author == user.username or user.is_superuser %}
-        <form action="{% url 'blog:comment_delete' pk=comment.pk %}" method="POST" class="col-3 ml-auto text-right">
-            {% csrf_token %}
-            {% bootstrap_button 'Delete' button_type='submit' button_class='btn-sm btn-link text-danger' %}
-        </form>
+        {% if not comment.is_deleted %}
+            <p>{{ comment.comment }}</p>
+            <p class="text-right text-muted"><small>By {{ comment.author }} at {{ comment.pub_date|date:'F d, Y' }}</small></p>
+            {% if comment.author == user.username or user.is_superuser %}
+            <form action="{% url 'blog:comment_delete' pk=comment.pk %}" method="POST" class="col-3 ml-auto text-right">
+                {% csrf_token %}
+                {% bootstrap_button 'Delete' button_type='submit' button_class='btn-sm btn-link text-danger' %}
+            </form>
+            {% endif %}
         {% endif %}
     </div>
     {% endfor %}

@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -6,6 +7,7 @@ from django.views.generic.edit import FormMixin
 
 from . import forms
 from . import models
+from users.forms import UserCreateForm
 
 
 class BlogPostListView(generic.ListView):
@@ -25,6 +27,8 @@ class BlogPostDetailView(FormMixin, generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['comments'] = models.Comment.objects.filter(post=self.object)
         context['form'] = self.get_form()
+        context['login_form'] = AuthenticationForm()
+        context['signup_form'] = UserCreateForm(auto_id='signup_id_%s')
         return context
 
     def post(self, request, *args, **kwargs):

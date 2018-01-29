@@ -17,7 +17,11 @@ class MyLoginView(LoginView):
 class SignUpView(generic.CreateView):
     form_class = forms.UserCreateForm
     template_name = 'registration/signup.html'
-    success_url = reverse_lazy('blog:list')
+
+    def get_success_url(self):
+        if 'next' in self.request.POST:
+            return self.request.POST.get('next')
+        return reverse_lazy('blog:list')
 
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:

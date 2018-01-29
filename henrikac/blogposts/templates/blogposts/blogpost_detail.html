@@ -18,7 +18,53 @@
 
     {% if not user.is_authenticated %}
     <div class="col-10 col-md-8 col-lg-6 mb-5 text-center lead mx-auto my-3">
-        <a href="{% url 'users:login' %}" class="text-dark"><u>Login</u></a> or <a href="{% url 'users:signup' %}" class="text-dark"><u>Sign up</u></a> to create a comment
+        <a href="#" class="text-dark" data-toggle="modal" data-target="#loginModal"><u>Login</u></a> or
+        <a href="#" class="text-dark" data-toggle="modal" data-target="#aignupModal"><u>Sign up</u></a> to create a comment
+
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-info">
+                        <h5 class="modal-title text-white" id="loginModalLabel">Login</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-5">
+                        <form action="{% url 'users:login' %}" method="POST" class="col-12 col-md-8 mx-auto">
+                            {% csrf_token %}
+                            {% bootstrap_form login_form %}
+                            {% bootstrap_button 'Login' button_type='submit' button_class='btn-info btn-block mt-3' %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sign up Modal -->
+        <div class="modal fade" id="aignupModal" tabindex="-1" role="dialog" aria-labelledby="aignupModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-info">
+                        <h5 class="modal-title text-white" id="aignupModalLabel">Sign up</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-5">
+                        <form action="{% url 'users:signup' %}" method="POST" class="col-12 col-md-8 mx-auto">
+                            {% csrf_token %}
+                            {% bootstrap_form signup_form %}
+                            {% bootstrap_button 'Sign up' button_type='submit' button_class='btn-info btn-block mt-3' %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     {% endif %}
 

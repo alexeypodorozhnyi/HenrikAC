@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden, HttpResponseRedirect
@@ -52,6 +53,7 @@ class BlogPostDetailView(FormMixin, generic.DetailView):
             comment=form.cleaned_data['comment'],
             author=author,
         )
+        messages.success(self.request, 'Comment created successfully')
         return super().form_valid(form)
 
 
@@ -72,6 +74,10 @@ class CommentDeleteView(LoginRequiredMixin, generic.DeleteView):
     def post(self, request, *args, **kwargs):
         user = self.request.user
         self.object = self.get_object()
-        if not self.object.author == user.username or user.is_superuser:
+        if not self.object.author == user.username and not user.is_superuser:
             return HttpResponseRedirect(reverse('blog:list'))
         return self.delete(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Comment deleted successfully')
+        return super().delete(request, *args, **kwargs)

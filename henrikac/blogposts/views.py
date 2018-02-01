@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic.edit import FormMixin
+
 
 from . import forms
 from . import models
@@ -34,7 +35,7 @@ class BlogPostDetailView(FormMixin, generic.DetailView):
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return HttpResponseForbidden()
+            raise PermissionDenied
         self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
@@ -75,7 +76,7 @@ class CommentDeleteView(LoginRequiredMixin, generic.DeleteView):
         user = self.request.user
         self.object = self.get_object()
         if not self.object.author == user.username and not user.is_superuser:
-            return HttpResponseRedirect(reverse('blog:list'))
+            raise PermissionDenied
         return self.delete(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):

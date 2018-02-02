@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'bootstrap4',
     'blogposts',
+    'contacts',
     'portfolioprojects',
     'users',
 ]
@@ -148,3 +149,9 @@ LOGIN_REDIRECT_URL = 'blog:list'
 LOGOUT_REDIRECT_URL = 'blog:list'
 
 AUTH_USER_MODEL = 'users.User'
+
+# Email settings
+# https://docs.djangoproject.com/en/2.0/topics/email/#file-backend
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'emails')

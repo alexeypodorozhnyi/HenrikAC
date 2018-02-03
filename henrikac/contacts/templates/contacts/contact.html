@@ -1,0 +1,25 @@
+{% extends '_layout.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Contact me {{ block.super }}{% endblock %}
+
+{% block heading %}Contact me{% endblock %}
+
+{% block subheading %}Want to get in touch with me?{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="col-12 col-md-6 mx-auto py-5">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert bg-{{ message.tags }} text-white text-center lead" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button 'Send' button_type='submit' button_class='btn-info' %}
+        </form>
+    </div>
+</div>
+{% endblock %}

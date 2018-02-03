@@ -39,6 +39,9 @@
                         <li class="nav-item">
                             <a href="{% url 'blog:list' %}" class="nav-link text-info">Blog</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{% url 'contact:contact_me' %}" class="nav-link text-info">Contact</a>
+                        </li>
 
                         {% if user.is_authenticated %}
                         <li class="nav-item">

@@ -17,3 +17,24 @@ h1, h2, h3, h4, h5, h6,
 a.text-info:hover {
     transition: .8s;
 }
+/*********************
+PORTFOLIO OVERLAY - https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_fade
+*********************/
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 1s ease;
+  background-color: #262626;
+}
+.project:hover .overlay {
+  opacity: .9;
+}
+.project .overlay h3 {
+  font-size: 2.5rem;
+}

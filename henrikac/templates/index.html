@@ -5,24 +5,29 @@
 
 {% block heading %}Henrik Abel{% endblock %}
 
-{% block subheading %}Web developer - Djangonaut{% endblock %}
+{% block subheading %}Computer science student{% endblock %}
 
 {% block content %}
-<div class="container py-5">
+<main class="container py-5">
     <div class="row">
-        <div class="col-10 col-lg-8 mx-auto">
+        <div class="col-lg-8 mx-auto">
             <h2 class="text-center">Who am I?</h2>
             <hr class="col-5 col-sm-3 col-md-2 bg-info">
-            <p class="lead">
+            <p class="lead mt-5">
                 Hello, I'm Henrik.<br>
-                I'm a web developer - djangonaut - from Hjørring, Denmark.<br>
-                I really love to sit and program, and when I do, I mainly use python / django.<br>
-                I do also have experience using HTML, CSS / bootstrap and JavaScript / jQuery.
+                I'm a computer science student / djangonaut from Hjørring, Denmark.<br>
+                When I'm not studying I like to watch movies, listen to music and tinker around with different programming languages (and frameworks).<br>
+                I'm very interested in asian languages and culture, programming and outer space and it would be so cool if I could get a job one day where I could combine those interests.<br>
             </p>
         </div>
-        <div class="col-8 col-lg-3 mx-auto mt-5">
-            <img src="{% static 'img/profile-pic.png' %}" class="img-fluid rounded-circle" alt="Picture of Henrik Abel Christensen">
+        <div class="col-lg-8 mx-auto mt-5">
+            <h2 class="text-center">Experience</h2>
+            <hr class="col-5 col-sm-3 col-md-2 bg-info">
+            <p class="lead mt-5">
+                I have experience with a lot of different programming languages (and frameworks) but my favorite is python / django.<br>
+                I'm currently learning C at the university (imperative programming).<br>
+            </p>
         </div>
     </div>
-</div>
+</main>
 {% endblock %}

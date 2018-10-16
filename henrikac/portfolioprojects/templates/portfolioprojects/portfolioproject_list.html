@@ -5,25 +5,28 @@
 
 {% block heading %}My Portfolio{% endblock %}
 
-{% block subheading %}Some of my favorit projects{% endblock %}
+{% block subheading %}Some of my favorite projects{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center">
+<main class="container mt-5">
+    <div class="row justify-content-center no-gutters">
         {% for project in object_list %}
-        <div class="col-10 col-sm-8 col-lg-4 mb-3">
-            <div class="card border-info h-100 mb-3">
-                <img class="card-img-top" src="{% static 'img/'|add:project.photo_file_name %}" alt="Photo of {{ project.title }}">
-                <div class="card-body text-info">
-                    <h5 class="card-title text-center">{{ project.title }}</h5>
-                    <p class="card-text">{{ project.description|linebreaksbr }}</p>
-                </div>
-                <div class="p-3">
-                    <a href="{{ project.url }}" target="_blank" class="btn btn-info btn-block">Visit</a>
-                </div>
+            <div class="col-lg-6 project">
+                <a href="{{ project.url }}" target="_blank">
+                    <img src="{% static 'img/'|add:project.photo_file_name %}" alt="Photo of my {{ project.title }} app" class="img-fluid">
+                    <div class="p-3 overlay">
+                        <h3 class="text-center text-white lead">{{ project.title }}</h3>
+                        <p class="text-white lead">{{ project.description }}</p>
+                    </div>
+                </a>
             </div>
-        </div>
+            <div class="d-lg-none col-12 bg-dark mb-5 p-3">
+                <h3 class="text-center text-white lead">{{ project.title }}</h3>
+                <p class="text-white lead">
+                    <small>{{ project.description }}</small>
+                </p>
+            </div>
         {% endfor %}
     </div>
-</div>
+</main>
 {% endblock %}

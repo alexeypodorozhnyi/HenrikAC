@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'bootstrap4',
+    'braces',
     'blogposts',
     'contacts',
     'portfolioprojects',
@@ -146,7 +147,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
 # Authentication
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'blog:list'
-LOGOUT_REDIRECT_URL = 'blog:list'
+LOGOUT_REDIRECT_URL = 'home'
 
 AUTH_USER_MODEL = 'users.User'
 

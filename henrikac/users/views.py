@@ -4,17 +4,16 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
+from braces.views import AnonymousRequiredMixin
+
 from . import forms
 
 
-class MyLoginView(LoginView):
-    def get(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('blog:list'))
-        return super().get(request, *args, **kwargs)
+class MyLoginView(AnonymousRequiredMixin, LoginView):
+    pass
 
 
-class SignUpView(generic.CreateView):
+class SignUpView(AnonymousRequiredMixin, generic.CreateView):
     form_class = forms.UserCreateForm
     template_name = 'registration/signup.html'
 
@@ -22,11 +21,6 @@ class SignUpView(generic.CreateView):
         if 'next' in self.request.POST:
             return self.request.POST.get('next')
         return reverse_lazy('blog:list')
-
-    def get(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('blog:list'))
-        return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):
         valid = super().form_valid(form)
